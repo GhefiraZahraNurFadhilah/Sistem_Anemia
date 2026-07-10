@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deteksi Risiko Anemia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="{{ url_for('beranda') }}" class="logo-section">
+                    <div class="logo">
+                        <svg width="24" height="24" fill="none" stroke="white" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Sistem Skrining Anemia</h1>
+                        <p>Non-Invasif Berbasis AI</p>
+                    </div>
+                </a>
+                <nav>
+                    <a href="{{ url_for('beranda') }}">Beranda</a>
+                    <a href="{{ url_for('deteksi') }}" class="active">Deteksi Risiko</a>
+                    <a href="{{ url_for('informasi') }}">Informasi Anemia</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="content-wrapper">
+            <div class="page-title">
+                <h2>Deteksi Risiko Anemia</h2>
+                <p>Unggah citra konjungtiva mata dan isi data gejala klinis untuk memulai skrining</p>
+            </div>
+
+            <div id="formContainer">
+                <!-- UPLOAD -->
+                <div class="card">
+                    <h3>Unggah Citra Konjungtiva</h3>
+                    <div id="uploadContainer">
+                        <div id="uploadArea" class="upload-area" onclick="document.getElementById('fileInput').click()">
+                            <svg class="upload-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            </svg>
+                            <p>Klik untuk unggah gambar</p>
+                            <small>Format: JPG, PNG, max 5MB</small>
+                        </div>
+                        <div class="upload-buttons">
+                            <button class="btn-upload" onclick="document.getElementById('fileInput').click()">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                                </svg>
+                                Unggah dari Perangkat
+                            </button>
+                            <button class="btn-upload btn-camera" onclick="openCamera()">
+                                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                </svg>
+                                Ambil Foto Langsung
+                            </button>
+                        </div>
+                        <div id="imagePreview" class="image-preview hidden">
+                            <img id="previewImg" src="" alt="Preview">
+                            <div class="preview-actions">
+                                <button class="btn-edit" onclick="openCropEditor()">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/>
+                                    </svg>
+                                    Crop Ulang
+                                </button>
+                                <button class="btn-delete" onclick="removeImage()">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                    Hapus
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <input type="file" id="fileInput" accept="image/jpeg,image/png" class="hidden" onchange="handleFileSelect(event)">
+                </div>
+
+                <!-- PANDUAN -->
+                <div class="guidelines">
+                    <div class="guidelines-header">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <h3>Panduan Pengambilan Citra</h3>
+                    </div>
+                    <ul>
+                        <li>Gunakan pencahayaan yang cukup</li>
+                        <li>Tarik kelopak mata bawah dengan lembut</li>
+                        <li>Posisikan konjungtiva di dalam kotak panduan</li>
+                        <li>Pastikan gambar tidak blur</li>
+                        <li>Kualitas kamera dapat memengaruhi hasil deteksi. Disarankan menggunakan kamera smartphone dengan pencahayaan yang cukup.</li>
+                    </ul>
+                    <p style="margin-top:0.75rem;font-size:0.875rem;">
+                        <a href="{{ url_for('informasi') }}" style="color:#0066cc;text-decoration:none;font-weight:500;">Baca selengkapnya di Informasi Anemia →</a>
+                    </p>
+                </div>
+
+                <!-- GEJALA -->
+                <div class="card">
+                    <h3>Gejala Klinis</h3>
+                    <p style="font-size:0.875rem;color:#666;margin-bottom:1rem;">Jawab semua pertanyaan berikut sebelum melakukan analisis.</p>
+                    <div class="symptoms-list">
+                        <div class="symptom-item">
+                            <span class="symptom-label">1. Apakah Anda sering merasa lemas atau mudah lelah?</span>
+                            <div class="radio-group">
+                                <div class="radio-option"><input type="radio" id="s1y" name="symptom1" value="yes" onchange="checkForm()"><label for="s1y">Ya</label></div>
+                                <div class="radio-option"><input type="radio" id="s1n" name="symptom1" value="no" onchange="checkForm()"><label for="s1n">Tidak</label></div>
+                            </div>
+                        </div>
+                        <div class="symptom-item">
+                            <span class="symptom-label">2. Apakah Anda sering merasa pusing?</span>
+                            <div class="radio-group">
+                                <div class="radio-option"><input type="radio" id="s2y" name="symptom2" value="yes" onchange="checkForm()"><label for="s2y">Ya</label></div>
+                                <div class="radio-option"><input type="radio" id="s2n" name="symptom2" value="no" onchange="checkForm()"><label for="s2n">Tidak</label></div>
+                            </div>
+                        </div>
+                        <div class="symptom-item">
+                            <span class="symptom-label">3. Apakah Anda sering merasa mengantuk atau kurang bertenaga meskipun sudah cukup istirahat?</span>
+                            <div class="radio-group">
+                                <div class="radio-option"><input type="radio" id="s3y" name="symptom3" value="yes" onchange="checkForm()"><label for="s3y">Ya</label></div>
+                                <div class="radio-option"><input type="radio" id="s3n" name="symptom3" value="no" onchange="checkForm()"><label for="s3n">Tidak</label></div>
+                            </div>
+                        </div>
+                        <div class="symptom-item">
+                            <span class="symptom-label">4. Apakah Anda mengalami sesak napas ringan saat aktivitas?</span>
+                            <div class="radio-group">
+                                <div class="radio-option"><input type="radio" id="s4y" name="symptom4" value="yes" onchange="checkForm()"><label for="s4y">Ya</label></div>
+                                <div class="radio-option"><input type="radio" id="s4n" name="symptom4" value="no" onchange="checkForm()"><label for="s4n">Tidak</label></div>
+                            </div>
+                        </div>
+                        <div class="symptom-item">
+                            <span class="symptom-label">5. Apakah jantung terasa berdebar tanpa aktivitas berat?</span>
+                            <div class="radio-group">
+                                <div class="radio-option"><input type="radio" id="s5y" name="symptom5" value="yes" onchange="checkForm()"><label for="s5y">Ya</label></div>
+                                <div class="radio-option"><input type="radio" id="s5n" name="symptom5" value="no" onchange="checkForm()"><label for="s5n">Tidak</label></div>
+                            </div>
+                        </div>
+                        <div class="symptom-item">
+                            <span class="symptom-label">6. Apakah Anda sering mengalami sakit kepala?</span>
+                            <div class="radio-group">
+                                <div class="radio-option"><input type="radio" id="s6y" name="symptom6" value="yes" onchange="checkForm()"><label for="s6y">Ya</label></div>
+                                <div class="radio-option"><input type="radio" id="s6n" name="symptom6" value="no" onchange="checkForm()"><label for="s6n">Tidak</label></div>
+                            </div>
+                        </div>
+                        <div class="symptom-item">
+                            <span class="symptom-label">7. Apakah Anda sulit berkonsentrasi?</span>
+                            <div class="radio-group">
+                                <div class="radio-option"><input type="radio" id="s7y" name="symptom7" value="yes" onchange="checkForm()"><label for="s7y">Ya</label></div>
+                                <div class="radio-option"><input type="radio" id="s7n" name="symptom7" value="no" onchange="checkForm()"><label for="s7n">Tidak</label></div>
+                            </div>
+                        </div>
+                        <div class="symptom-item">
+                            <span class="symptom-label">8. Apakah tangan atau kaki sering terasa dingin?</span>
+                            <div class="radio-group">
+                                <div class="radio-option"><input type="radio" id="s8y" name="symptom8" value="yes" onchange="checkForm()"><label for="s8y">Ya</label></div>
+                                <div class="radio-option"><input type="radio" id="s8n" name="symptom8" value="no" onchange="checkForm()"><label for="s8n">Tidak</label></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-analyze" id="btnAnalyze" onclick="analyzeRisk()" disabled>Analisis Risiko Anemia</button>
+            </div>
+
+            <!-- HASIL -->
+            <div class="results-section" id="resultsSection">
+                <div class="result-card">
+                    <div class="result-header"><h3>Hasil Analisis Risiko Anemia</h3></div>
+
+                    <!-- 3 GAMBAR SEJAJAR -->
+                    <div id="imageCompareBox" style="display:none;flex-direction:row;gap:0.75rem;margin:0 auto 1.5rem;max-width:680px;">
+                        <div style="flex:1;text-align:center;">
+                            <p style="font-size:0.72rem;font-weight:600;color:#555;margin-bottom:0.4rem;">📷 Foto Asli</p>
+                            <img id="imgAsli" src="" alt="Foto Asli" style="width:100%;height:130px;object-fit:cover;border-radius:8px;border:1px solid #ddd;">
+                        </div>
+                        <div style="flex:1;text-align:center;">
+                            <p style="font-size:0.72rem;font-weight:600;color:#555;margin-bottom:0.4rem;">✂️ Foto Crop</p>
+                            <img id="imgCrop" src="" alt="Foto Crop" style="width:100%;height:130px;object-fit:cover;border-radius:8px;border:1px solid #ddd;">
+                        </div>
+                        <div style="flex:1;text-align:center;">
+                            <p style="font-size:0.72rem;font-weight:600;color:#555;margin-bottom:0.4rem;">🔬 Segmentasi</p>
+                            <img id="imgSeg" src="" alt="Segmentasi" style="width:100%;height:130px;object-fit:contain;border-radius:8px;border:1px solid #ddd;background:#000;">
+                        </div>
+                    </div>
+
+                    <!-- STATUS -->
+                    <div class="status-wrapper" id="statusWrapper">
+                        <div class="status-card">
+                            <div class="status-header">
+                                <div class="status-icon" id="statusIcon"><svg id="statusSvg" width="28" height="28" fill="white" viewBox="0 0 20 20"></svg></div>
+                                <div class="status-text"><p>Status Risiko</p><h4 id="statusText"></h4></div>
+                            </div>
+                            <div class="confidence-section">
+                                <div class="confidence-header">
+                                    <span class="confidence-label">Nilai Confidence</span>
+                                    <span class="confidence-value" id="confidenceValue">0%</span>
+                                </div>
+                                <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- REKOMENDASI -->
+                    <div class="recommendation-box" id="recommendationBox">
+                        <h4><svg width="20" height="20" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg> Rekomendasi</h4>
+                        <p id="recommendationText"></p>
+                    </div>
+
+                    <!-- NOTICE -->
+                    <div class="notice-box">
+                        <div class="notice-content">
+                            <div class="notice-icon"><svg width="24" height="24" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg></div>
+                            <div class="notice-text">
+                                <h4>Penting untuk Diingat</h4>
+                                <p>Hasil ini adalah <strong>skrining awal</strong> dan bukan diagnosis medis. Untuk diagnosis yang akurat, harap konsultasikan dengan dokter atau tenaga kesehatan profesional.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn-secondary" onclick="resetForm()">Lakukan Skrining Ulang</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='upload/ref.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

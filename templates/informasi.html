@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informasi Anemia</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="{{ url_for('beranda') }}" class="logo-section">
+                    <div class="logo">
+                        <svg width="24" height="24" fill="none" stroke="white" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Sistem Skrining Anemia</h1>
+                        <p>Non-Invasif Berbasis AI</p>
+                    </div>
+                </a>
+                <nav>
+                    <a href="{{ url_for('beranda') }}">Beranda</a>
+                    <a href="{{ url_for('deteksi') }}">Deteksi Risiko</a>
+                    <a href="{{ url_for('informasi') }}" class="active">Informasi Anemia</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container beranda-wrapper">
+            <div class="page-title">
+                <h2>Informasi Anemia</h2>
+                <p>Pelajari tentang anemia, gejalanya, dan cara pengambilan foto konjungtiva yang benar</p>
+            </div>
+
+            <!-- APA ITU ANEMIA -->
+            <div class="card">
+                <h3>🩸 Apa Itu Anemia?</h3>
+                <p style="color:#555;line-height:1.8;margin-top:0.75rem;">
+                    Anemia adalah kondisi di mana tubuh kekurangan sel darah merah yang sehat atau hemoglobin yang cukup untuk membawa oksigen ke seluruh jaringan tubuh.
+                    Kondisi ini dapat menyebabkan tubuh terasa lelah, lemas, dan kurang berenergi karena jaringan dan organ tidak mendapat cukup oksigen.
+                </p>
+                <p style="color:#555;line-height:1.8;margin-top:0.5rem;">
+                    Anemia merupakan salah satu masalah kesehatan yang umum di Indonesia, terutama pada wanita usia subur, ibu hamil, dan remaja putri.
+                </p>
+            </div>
+
+            <!-- GEJALA -->
+            <div class="card">
+                <h3>⚠️ Gejala Umum Anemia</h3>
+                <div class="beranda-grid" style="margin-top:1rem;">
+                    <div style="padding:1rem;background:#fff8f8;border-radius:8px;border:1px solid #fdd;">
+                        <p style="font-weight:600;margin-bottom:0.75rem;">Gejala Fisik</p>
+                        <ul style="list-style:none;margin:0;color:#555;font-size:0.875rem;">
+                            <li style="margin-bottom:0.75rem;">
+                                <strong>Mudah lelah dan lemas</strong><br>
+                                <span style="color:#777;font-size:0.82rem;">Tubuh terasa berat dan tidak bertenaga meski tidak banyak beraktivitas.</span>
+                            </li>
+                            <li style="margin-bottom:0.75rem;">
+                                <strong>Sesak napas ringan saat aktivitas</strong><br>
+                                <span style="color:#777;font-size:0.82rem;">Napas terasa pendek atau berat saat berjalan, naik tangga, atau aktivitas ringan lainnya.</span>
+                            </li>
+                            <li style="margin-bottom:0.75rem;">
+                                <strong>Tangan dan kaki terasa dingin</strong><br>
+                                <span style="color:#777;font-size:0.82rem;">Ujung jari terasa dingin meski suhu ruangan normal karena aliran darah ke bagian tepi tubuh berkurang.</span>
+                            </li>
+                            <li>
+                                <strong>Jantung berdebar-debar</strong><br>
+                                <span style="color:#777;font-size:0.82rem;">Jantung berdetak cepat atau tidak teratur saat istirahat karena bekerja lebih keras mengompensasi kekurangan oksigen.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div style="padding:1rem;background:#f8faff;border-radius:8px;border:1px solid #dde;">
+                        <p style="font-weight:600;margin-bottom:0.75rem;">Gejala Lainnya</p>
+                        <ul style="list-style:none;margin:0;color:#555;font-size:0.875rem;">
+                            <li style="margin-bottom:0.75rem;">
+                                <strong>Pusing</strong><br>
+                                <span style="color:#777;font-size:0.82rem;">Kepala terasa berputar atau melayang, terutama saat berdiri tiba-tiba — akibat otak kekurangan pasokan oksigen.</span>
+                            </li>
+                            <li style="margin-bottom:0.75rem;">
+                                <strong>Sakit kepala</strong><br>
+                                <span style="color:#777;font-size:0.82rem;">Rasa nyeri atau tekanan di kepala yang berulang, berbeda dengan pusing — terasa seperti ditekan atau berdenyut.</span>
+                            </li>
+                            <li style="margin-bottom:0.75rem;">
+                                <strong>Sulit berkonsentrasi</strong><br>
+                                <span style="color:#777;font-size:0.82rem;">Mudah lupa, susah fokus, atau pikiran terasa kosong saat bekerja maupun belajar.</span>
+                            </li>
+                            <li style="margin-bottom:0.75rem;">
+                                <strong>Mengantuk berlebihan</strong><br>
+                                <span style="color:#777;font-size:0.82rem;">Tidur cukup namun tetap merasa mengantuk dan lesu sepanjang hari.</span>
+                            </li>
+                            <li>
+                                <strong>Konjungtiva tampak pucat</strong><br>
+                                <span style="color:#777;font-size:0.82rem;">Bagian dalam kelopak mata bawah berwarna putih atau merah muda sangat pucat, menandakan kadar hemoglobin rendah.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KONJUNGTIVA -->
+            <div class="card">
+                <h3>👁️ Apa Itu Konjungtiva?</h3>
+                <p style="color:#555;line-height:1.8;margin-top:0.75rem;">
+                    Konjungtiva adalah selaput tipis bening yang melapisi bagian dalam kelopak mata dan menutupi bagian putih bola mata.
+                    Pada penderita anemia, konjungtiva akan tampak <strong>pucat atau keputihan</strong> karena berkurangnya hemoglobin dalam darah.
+                    Pada orang normal, konjungtiva berwarna <strong>merah muda hingga merah cerah</strong>.
+                </p>
+                <div style="margin-top:1rem;padding:1rem;background:#e7f3ff;border-radius:8px;border:1px solid #b3d9ff;">
+                    <p style="font-size:0.875rem;color:#004a99;font-weight:600;">Cara melihat konjungtiva:</p>
+                    <p style="font-size:0.875rem;color:#0055b3;margin-top:0.25rem;line-height:1.6;">
+                        Tarik perlahan kelopak mata bawah ke arah bawah menggunakan jari telunjuk yang bersih, hingga bagian dalam kelopak mata terlihat.
+                    </p>
+                </div>
+            </div>
+
+            <!-- PANDUAN FOTO -->
+            <div class="guidelines">
+                <div class="guidelines-header">
+                    <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                    </svg>
+                    <h3>Panduan Lengkap Pengambilan Foto Konjungtiva</h3>
+                </div>
+                <ul>
+                    <li><strong>Pencahayaan:</strong> Gunakan pencahayaan alami (dekat jendela) atau lampu yang cukup terang. Hindari backlight (cahaya dari belakang).</li>
+                    <li><strong>Posisi:</strong> Hadap ke sumber cahaya, lalu tarik kelopak mata bawah dengan lembut menggunakan jari bersih.</li>
+                    <li><strong>Jarak kamera:</strong> Posisikan kamera sekitar 15–20 cm dari mata untuk mendapatkan detail yang jelas.</li>
+                    <li><strong>Fokus:</strong> Pastikan gambar tidak blur. Tahan napas sejenak saat memotret agar kamera tidak bergerak.</li>
+                    <li><strong>Area foto:</strong> Pastikan bagian dalam kelopak mata bawah (konjungtiva palpebra) terlihat jelas dan berada di tengah frame.</li>
+                    <li><strong>Kualitas kamera:</strong> Disarankan menggunakan kamera smartphone dengan resolusi minimal 8MP dan pencahayaan yang cukup untuk hasil terbaik.</li>
+                    <li><strong>Hindari:</strong> Flash langsung, bayangan pada mata, dan gambar yang terlalu gelap atau terlalu terang.</li>
+                </ul>
+            </div>
+
+            <!-- FAKTOR RISIKO -->
+            <div class="card">
+                <h3>🎯 Faktor Risiko Anemia</h3>
+                <ul style="list-style:disc;margin-left:1.5rem;color:#555;line-height:2;margin-top:0.75rem;font-size:0.9rem;">
+                    <li>Wanita usia subur (terutama saat menstruasi banyak)</li>
+                    <li>Ibu hamil dan menyusui</li>
+                    <li>Remaja putri yang sedang tumbuh kembang</li>
+                    <li>Kurang konsumsi makanan kaya zat besi (daging merah, sayuran hijau, kacang-kacangan)</li>
+                    <li>Penderita penyakit kronis (gagal ginjal, radang usus, kanker)</li>
+                    <li>Vegetarian/vegan tanpa suplemen zat besi yang cukup</li>
+                </ul>
+            </div>
+
+            <!-- PENCEGAHAN -->
+            <div class="card">
+                <h3>✅ Pencegahan dan Penanganan</h3>
+                <ul style="list-style:disc;margin-left:1.5rem;color:#555;line-height:2;margin-top:0.75rem;font-size:0.9rem;">
+                    <li>Konsumsi makanan kaya zat besi: daging merah, hati ayam, ikan, bayam, kacang-kacangan</li>
+                    <li>Konsumsi vitamin C bersamaan dengan makanan kaya zat besi untuk meningkatkan penyerapan</li>
+                    <li>Minum suplemen zat besi sesuai anjuran dokter</li>
+                    <li>Lakukan pemeriksaan darah lengkap secara rutin, minimal 6 bulan sekali</li>
+                    <li>Segera konsultasikan ke dokter jika mengalami gejala anemia</li>
+                </ul>
+            </div>
+
+            <!-- CTA -->
+            <div class="beranda-alert-modern" style="text-align:center;">
+                Sudah memahami informasi di atas? 
+                <a href="{{ url_for('deteksi') }}" style="color:#994447;font-weight:600;text-decoration:none;margin-left:0.5rem;">
+                    Mulai Deteksi Sekarang →
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>Sistem Skrining Anemia Non-Invasif — Untuk keperluan penelitian dan skrining awal.</p>
+        </div>
+    </footer>
+</body>
+</html>

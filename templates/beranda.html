@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beranda - Sistem Skrining Anemia</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+   <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="{{ url_for('beranda') }}" class="logo-section">
+                    <div class="logo">
+                        <svg width="24" height="24" fill="none" stroke="white" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <div class="logo-text">
+                        <h1>Sistem Skrining Anemia</h1>
+                        <p>Non-Invasif Berbasis AI</p>
+                    </div>
+                </a>
+                <nav class="mobile-hidden">
+                    <a href="{{ url_for('beranda') }}" class="active" >Beranda</a>
+                    <a href="{{ url_for('deteksi') }}">Deteksi Risiko</a>
+                    <a href="{{ url_for('informasi') }}">Informasi Anemia</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <!-- MAIN -->
+    <main>
+        <div class="container beranda-wrapper">
+            <!-- HERO -->
+            <section class="hero">
+                <h1>Sistem Skrining Risiko Anemia Non-Invasif</h1>
+                <p>
+                    Sistem ini membantu skrining awal risiko anemia melalui analisis citra konjungtiva mata dan gejala klinis secara non-invasif.
+                </p>
+
+                <a href="{{ url_for('deteksi') }}" class="btn-start">
+                    Mulai Deteksi Risiko Anemia
+                </a>
+            </section>
+
+            <!-- GRID 2 KOLOM -->
+            <section class="beranda-grid">
+                <!-- CARD 1 -->
+                <div class="beranda-card-modern">
+                    <div class="icon-circle icon-eye">👁️</div>
+                    <h3>Penilaian dari Foto Mata</h3>
+                    <p>
+                        Sistem akan menganalisis warna konjungtiva (bagian dalam kelopak mata) untuk mendeteksi tanda pucat yang dapat mengindikasikan anemia menggunakan teknologi AI.
+                    </p>
+                </div>
+
+                <!-- CARD 2 -->
+                <div class="beranda-card-modern">
+                    <div class="icon-circle icon-form">📋</div>
+                    <h3>Penilaian dari Gejala</h3>
+                    <p>
+                        Anda akan menjawab beberapa pertanyaan sederhana terkait gejala seperti kelelahan, pusing, dan kondisi fisik lainnya berdasarkan konsultasi medis.
+                    </p>
+                </div>
+            </section>
+
+            <!-- ALERT -->
+            <div class="beranda-alert-modern">
+                ⚠️  Sistem ini ditujukan untuk <b>skrining awal,</b> bukan sebagai pengganti diagnosis dari tenaga medis.
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
